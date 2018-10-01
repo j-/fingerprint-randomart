@@ -96,12 +96,16 @@ export function fingerprintRandomartFrame (frame_index: number, dgst_raw: string
 	field[HALF_X][HALF_Y] = len - 1;
 	field[x][y] = len;
 
-	for (let y = 0; y < FLDSIZE_Y; y++) {
+	for (y = 0; y < FLDSIZE_Y; y++) {
 		for (x = 0; x < FLDSIZE_X; x++) {
 			retval += augmentation_string[Math.min(field[x][y], len)];
 		}
 		retval += '\n';
 	}
 
-	return retval;
+	return {
+		retval,
+		x,
+		y,
+	};
 }

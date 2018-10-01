@@ -32,11 +32,11 @@ export default class FingerprintRandomartAnimated extends React.Component<Props,
 	}
 
 	render () {
-		const art = fingerprintRandomartFrame(
+		const { retval } = fingerprintRandomartFrame(
 			this.state.tick,
 			this.props.digest,
 		);
-		return <pre>{art}</pre>;
+		return <pre>{retval}</pre>;
 	}
 
 	private tick = () => {
