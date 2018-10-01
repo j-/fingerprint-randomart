@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fingerprintRandomartFrame } from './fingerprint-randomart';
+import { fingerprintRandomartFrame, FLDSIZE_X } from './fingerprint-randomart';
 
 export interface Props {
 	digest: string;
@@ -32,11 +32,15 @@ export default class FingerprintRandomartAnimated extends React.Component<Props,
 	}
 
 	render () {
-		const { retval } = fingerprintRandomartFrame(
+		const { retval, x, y } = fingerprintRandomartFrame(
 			this.state.tick,
 			this.props.digest,
 		);
-		return <pre>{retval}</pre>;
+		const i = y * (FLDSIZE_X + 1) + x; // + 1 for '\n'
+		const before = retval.substring(0, i);
+		const e = retval[i];
+		const after = retval.substring(i + 1);
+		return <pre>{before}<strong>{e}</strong>{after}</pre>;
 	}
 
 	private tick = () => {

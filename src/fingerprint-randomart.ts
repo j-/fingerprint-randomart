@@ -1,6 +1,6 @@
-const FLDBASE = 8;
-const FLDSIZE_Y = FLDBASE + 1;
-const FLDSIZE_X = FLDBASE * 2 + 1;
+export const FLDBASE = 8;
+export const FLDSIZE_Y = FLDBASE + 1;
+export const FLDSIZE_X = FLDBASE * 2 + 1;
 const HALF_X = Math.floor(FLDSIZE_X / 2);
 const HALF_Y = Math.floor(FLDSIZE_Y / 2);
 
@@ -50,7 +50,7 @@ export function fingerprintRandomart (dgst_raw: string, augmentation_string: str
 	field[HALF_X][HALF_Y] = len - 1;
 	field[x][y] = len;
 
-	for (let y = 0; y < FLDSIZE_Y; y++) {
+	for (y = 0; y < FLDSIZE_Y; y++) {
 		for (x = 0; x < FLDSIZE_X; x++) {
 			retval += augmentation_string[Math.min(field[x][y], len)];
 		}
@@ -96,8 +96,8 @@ export function fingerprintRandomartFrame (frame_index: number, dgst_raw: string
 	field[HALF_X][HALF_Y] = len - 1;
 	field[x][y] = len;
 
-	for (y = 0; y < FLDSIZE_Y; y++) {
-		for (x = 0; x < FLDSIZE_X; x++) {
+	for (let y = 0; y < FLDSIZE_Y; y++) {
+		for (let x = 0; x < FLDSIZE_X; x++) {
 			retval += augmentation_string[Math.min(field[x][y], len)];
 		}
 		retval += '\n';
