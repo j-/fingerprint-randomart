@@ -1,6 +1,5 @@
 import * as React from 'react';
-import RandomArtRaw from './RandomArtRaw';
-import { fingerprintRandomartFrame } from './fingerprint-randomart';
+import FingerprintRandomartFrame from './FingerprintRandomartFrame';
 
 export interface Props {
 	digest: string;
@@ -33,16 +32,12 @@ export default class FingerprintRandomartAnimated extends React.Component<Props,
 	}
 
 	render () {
-		const { retval, x, y } = fingerprintRandomartFrame(
-			this.state.tick,
-			this.props.digest,
-		);
+		const { digest } = this.props;
+		const { tick } = this.state;
 		return (
-			<RandomArtRaw
-				raw={retval}
-				highlight={true}
-				x={x}
-				y={y}
+			<FingerprintRandomartFrame
+				digest={digest}
+				tick={tick}
 			/>
 		);
 	}
