@@ -1,6 +1,6 @@
 import * as React from 'react';
 import RandomArtRaw from './RandomArtRaw';
-import { fingerprintRandomartFrame } from './fingerprint-randomart';
+import { fingerprintRandomartFrame } from '../fingerprint-randomart';
 
 export interface Props {
 	digest: string;

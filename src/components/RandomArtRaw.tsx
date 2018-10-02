@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FLDSIZE_X } from './fingerprint-randomart';
+import { FLDSIZE_X } from '../fingerprint-randomart';
 
 export interface Props {
 	raw: string;
