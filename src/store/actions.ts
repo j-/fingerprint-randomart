@@ -49,3 +49,21 @@ export const unpauseAnimation = (): ActionSetPaused => ({
 		paused: false,
 	},
 });
+
+export interface ActionSetDigest {
+	type: 'SetDigest',
+	data: {
+		digest: string;
+	};
+}
+
+export const isActionSetDigest = (action: Action): action is ActionSetDigest => (
+	action.type === 'SetDigest'
+);
+
+export const setDigest = (digest: string): ActionSetDigest => ({
+	type: 'SetDigest',
+	data: {
+		digest,
+	},
+});
