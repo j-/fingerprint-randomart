@@ -73,6 +73,10 @@ export function fingerprintRandomartFrame (frame_index: number, dgst_raw: string
 	outer: for (let i = 0; i < dgst_raw_len; i += 2) {
 		let input = parseInt(dgst_raw[i] + dgst_raw[i + 1], 16);
 		for (let b = 0; b < 4; b++) {
+			if (cursor++ >= frame_index) {
+				break outer;
+			}
+
 			x += (input & 0x1) ? 1 : -1;
 			y += (input & 0x2) ? 1 : -1;
 
@@ -86,10 +90,6 @@ export function fingerprintRandomartFrame (frame_index: number, dgst_raw: string
 			}
 
 			input = input >> 2;
-
-			if (++cursor >= frame_index) {
-				break outer;
-			}
 		}
 	}
 
