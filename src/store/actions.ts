@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 
 export interface ActionSetAnimating {
-	type: 'SetAnimating',
+	type: 'SetAnimating';
 	data: {
 		animating: boolean;
 	};
@@ -26,7 +26,7 @@ export const stopAnimating = (): ActionSetAnimating => ({
 });
 
 export interface ActionSetPaused {
-	type: 'SetPaused',
+	type: 'SetPaused';
 	data: {
 		paused: boolean;
 	};
@@ -51,7 +51,7 @@ export const unpauseAnimation = (): ActionSetPaused => ({
 });
 
 export interface ActionSetDigest {
-	type: 'SetDigest',
+	type: 'SetDigest';
 	data: {
 		digest: string;
 	};
@@ -69,7 +69,7 @@ export const setDigest = (digest: string): ActionSetDigest => ({
 });
 
 export interface ActionTickClock {
-	type: 'TickClock',
+	type: 'TickClock';
 }
 
 export const isActionTickClock = (action: Action): action is ActionTickClock => (
