@@ -97,3 +97,15 @@ export const setTickDelay = (delay: number): ActionSetTickDelay => ({
 		delay,
 	},
 });
+
+export const setClockSlow = () => (
+	setTickDelay(1000)
+);
+
+export const setClockNormal = () => (
+	setTickDelay(500)
+);
+
+export const setClockFast = () => (
+	setTickDelay(100)
+);
