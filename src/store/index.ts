@@ -1,11 +1,12 @@
 import { Reducer } from 'redux';
-import { isActionSetAnimating, isActionSetPaused, isActionSetDigest, isActionTickClock } from './actions';
+import { isActionSetAnimating, isActionSetPaused, isActionSetDigest, isActionTickClock, isActionSetTickDelay } from './actions';
 
 export interface RootReducerState {
 	isAnimating: boolean;
 	isPaused: boolean;
 	digest: string;
 	tick: number;
+	delay: number;
 }
 
 const DEFAULT_STATE: RootReducerState = {
@@ -13,6 +14,7 @@ const DEFAULT_STATE: RootReducerState = {
 	isPaused: true,
 	digest: '0b2f3ae7adef1fa6c6698fe372c22c8a4a58387bf165efcc54b253704400dc85',
 	tick: 0,
+	delay: 500,
 };
 
 const reducer: Reducer<RootReducerState> = (state = DEFAULT_STATE, action) => {
@@ -46,6 +48,13 @@ const reducer: Reducer<RootReducerState> = (state = DEFAULT_STATE, action) => {
 		};
 	}
 
+	if (isActionSetTickDelay(action)) {
+		return {
+			...state,
+			delay: action.data.delay,
+		};
+	}
+
 	return state;
 };
 
@@ -69,4 +78,9 @@ export const getDigest = (state: RootReducerState) => (
 /** Get the current number of ticks for the clock. */
 export const getClockTick = (state: RootReducerState) => (
 	state.tick
+);
+
+/** Number of milliseconds between clock ticks. */
+export const getTickDelay = (state: RootReducerState) => (
+	state.delay
 );

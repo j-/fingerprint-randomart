@@ -1,17 +1,31 @@
 import { Middleware, Dispatch } from 'redux';
-import { ActionTickClock, isActionSetPaused, tick } from './actions';
+import { ActionTickClock, isActionSetPaused, tick, isActionSetTickDelay } from './actions';
+import { RootReducerState, getTickDelay } from '.';
 
 let interval: NodeJS.Timer;
+let callback: () => void;
 
-export const clock: Middleware<void, void, Dispatch<ActionTickClock>> = () => (next) => (action) => {
+export const clock: Middleware<void, RootReducerState, Dispatch<ActionTickClock>> = (store) => (next) => (action) => {
 	if (isActionSetPaused(action)) {
 		if (action.data.paused) {
 			clearInterval(interval);
 		} else {
-			interval = setInterval(() => {
+			callback = () => {
 				next(tick());
-			}, 500);
+			};
+			const delay = getTickDelay(store.getState());
+			interval = setInterval(callback, delay);
 		}
+		return next(action);
 	}
+
+	if (isActionSetTickDelay(action)) {
+		clearInterval(interval);
+		const result = next(action);
+		const delay = getTickDelay(store.getState());
+		interval = setInterval(callback, delay);
+		return result;
+	}
+
 	return next(action);
 };

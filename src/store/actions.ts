@@ -79,3 +79,21 @@ export const isActionTickClock = (action: Action): action is ActionTickClock => 
 export const tick = (): ActionTickClock => ({
 	type: 'TickClock',
 });
+
+export interface ActionSetTickDelay {
+	type: 'SetTickDelay';
+	data: {
+		delay: number;
+	};
+}
+
+export const isActionSetTickDelay = (action: Action): action is ActionSetTickDelay => (
+	action.type === 'SetTickDelay'
+);
+
+export const setTickDelay = (delay: number): ActionSetTickDelay => ({
+	type: 'SetTickDelay',
+	data: {
+		delay,
+	},
+});
