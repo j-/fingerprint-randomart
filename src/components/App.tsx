@@ -1,5 +1,5 @@
 import * as React from 'react';
-import FingerprintRandomart from '../containers/FingerprintRandomart';
+import FingerprintRandomart from '../containers/FingerprintRandomartAnimated';
 import AllDirections from './AllDirections';
 
 const App: React.StatelessComponent = () => (

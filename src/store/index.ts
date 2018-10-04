@@ -1,16 +1,18 @@
 import { Reducer } from 'redux';
-import { isActionSetAnimating, isActionSetPaused, isActionSetDigest } from './actions';
+import { isActionSetAnimating, isActionSetPaused, isActionSetDigest, isActionTickClock } from './actions';
 
 export interface RootReducerState {
 	isAnimating: boolean;
 	isPaused: boolean;
 	digest: string;
+	tick: number;
 }
 
 const DEFAULT_STATE: RootReducerState = {
 	isAnimating: true,
 	isPaused: true,
 	digest: '0b2f3ae7adef1fa6c6698fe372c22c8a4a58387bf165efcc54b253704400dc85',
+	tick: 0,
 };
 
 const reducer: Reducer<RootReducerState> = (state = DEFAULT_STATE, action) => {
@@ -18,6 +20,7 @@ const reducer: Reducer<RootReducerState> = (state = DEFAULT_STATE, action) => {
 		return {
 			...state,
 			isAnimating: action.data.animating,
+			tick: 0, // Reset clock when toggling animation
 		};
 	}
 
@@ -32,6 +35,14 @@ const reducer: Reducer<RootReducerState> = (state = DEFAULT_STATE, action) => {
 		return {
 			...state,
 			digest: action.data.digest,
+			tick: 0, // Reset clock when updating digest
+		};
+	}
+
+	if (isActionTickClock(action)) {
+		return {
+			...state,
+			tick: getClockTick(state) + 1,
 		};
 	}
 
@@ -53,4 +64,9 @@ export const isPaused = (state: RootReducerState) => (
 /** Get fingerprint digest hash. */
 export const getDigest = (state: RootReducerState) => (
 	state.digest.replace(/[^0-9a-f]/gi, '').toLowerCase()
+);
+
+/** Get the current number of ticks for the clock. */
+export const getClockTick = (state: RootReducerState) => (
+	state.tick
 );

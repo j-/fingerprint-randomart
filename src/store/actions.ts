@@ -67,3 +67,15 @@ export const setDigest = (digest: string): ActionSetDigest => ({
 		digest,
 	},
 });
+
+export interface ActionTickClock {
+	type: 'TickClock',
+}
+
+export const isActionTickClock = (action: Action): action is ActionTickClock => (
+	action.type === 'TickClock'
+);
+
+export const tick = (): ActionTickClock => ({
+	type: 'TickClock',
+});
