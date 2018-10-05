@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import {  } from '../fingerprint-randomart';
+
 import {
 	isActionSetAnimating,
 	isActionSetPaused,
