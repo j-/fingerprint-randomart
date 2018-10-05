@@ -1,17 +1,13 @@
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { RootReducerState } from '../store';
 import { setClockFast } from '../store/actions';
-import Button from '../components/Button';
+import Button, { Props as ButtonProps } from '../components/Button';
 
-interface DispatchProps {
-	onClick: () => void;
-}
-
-const mapStateToProps: MapStateToProps<void, void, RootReducerState> = () => ({
+const mapStateToProps: MapStateToProps<ButtonProps, ButtonProps, RootReducerState> = () => ({
 	children: 'Fast',
 });
 
-const mapDispatchToProps: MapDispatchToProps<DispatchProps, void> = ({
+const mapDispatchToProps: MapDispatchToProps<ButtonProps, ButtonProps> = ({
 	onClick: setClockFast,
 });
 
