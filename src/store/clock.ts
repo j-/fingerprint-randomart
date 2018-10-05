@@ -1,6 +1,6 @@
 import { Middleware, Dispatch } from 'redux';
 import { ActionTickClock, tick, isActionSetTickDelay } from './actions';
-import { RootReducerState, getTickDelay, isPaused } from '.';
+import { RootReducerState, getTickDelay, isPaused, isAnimating } from '.';
 
 let interval: NodeJS.Timer;
 let callback: () => void;
@@ -12,14 +12,16 @@ export const clock: Middleware<void, RootReducerState, Dispatch<ActionTickClock>
 	const delay = getTickDelay(after);
 	const isPausedBefore = isPaused(before);
 	const isPausedAfter = isPaused(after);
+	const isAnimatingBefore = isAnimating(before);
+	const isAnimatingAfter = isAnimating(after);
 
 	// Action has paused the animation
-	if (!isPausedBefore && isPausedAfter) {
+	if (!isPausedBefore && isPausedAfter || isAnimatingBefore !== isAnimatingAfter) {
 		clearInterval(interval);
 	}
 
 	// Action has resumed the animation
-	if (isPausedBefore && !isPausedAfter) {
+	if (isPausedBefore && !isPausedAfter && isAnimatingAfter) {
 		callback = () => {
 			next(tick());
 		};

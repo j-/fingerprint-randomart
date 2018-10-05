@@ -31,6 +31,7 @@ const reducer: Reducer<RootReducerState> = (state = DEFAULT_STATE, action) => {
 		return {
 			...state,
 			isAnimating: action.data.animating,
+			isPaused: true,
 			tick: 0, // Reset clock when toggling animation
 		};
 	}
@@ -39,6 +40,7 @@ const reducer: Reducer<RootReducerState> = (state = DEFAULT_STATE, action) => {
 		return {
 			...state,
 			isAnimating: !isAnimating(state),
+			isPaused: true,
 			tick: 0, // Reset clock when toggling animation
 		};
 	}
