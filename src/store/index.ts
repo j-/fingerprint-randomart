@@ -39,7 +39,7 @@ const reducer: Reducer<RootReducerState> = (state = DEFAULT_STATE, action) => {
 	if (isActionToggleAnimating(action)) {
 		return {
 			...state,
-			isAnimating: !isAnimating(state),
+			isAnimating: !isAnimationEnabled(state),
 			isPaused: true,
 			tick: 0, // Reset clock when toggling animation
 		};
@@ -88,13 +88,19 @@ const reducer: Reducer<RootReducerState> = (state = DEFAULT_STATE, action) => {
 export default reducer;
 
 /** Draw fingerprint randomart frame-by-frame instead of showing final result. */
-export const isAnimating = (state: RootReducerState) => (
+export const isAnimationEnabled = (state: RootReducerState) => (
 	state.isAnimating
 );
 
 /** Pause drawing of the fingerprint randomart on the current frame. */
-export const isPaused = (state: RootReducerState) => (
+export const isAnimationPaused = (state: RootReducerState) => (
 	state.isPaused
+);
+
+/** Animation is enabled and not paused. */
+export const isAnimationPlaying = (state: RootReducerState) => (
+	isAnimationEnabled(state) &&
+	!isAnimationPaused(state)
 );
 
 /** Get fingerprint digest hash. */
@@ -113,7 +119,7 @@ export const getClockTick = (state: RootReducerState) => (
 );
 
 /** Get the clock tick value bound between 0 and 2 * digest length. */
-export const getBoundClockTick = (state: RootReducerState) => {
+export const getCursorPosition = (state: RootReducerState) => {
 	const max = getDigestLength(state) * 2 + 1;
 	const tick = getClockTick(state);
 	return (tick % max + max) % max;

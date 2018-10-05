@@ -1,6 +1,6 @@
 import { connect, MapStateToProps, MapDispatchToProps } from 'react-redux';
 import ButtonPlayPause from '../components/ButtonPlayPause';
-import { RootReducerState, isPaused } from '../store';
+import { RootReducerState, isAnimationPaused } from '../store';
 import { pauseAnimation, unpauseAnimation } from '../store/actions';
 
 interface StateProps {
@@ -13,7 +13,7 @@ interface DispatchProps {
 }
 
 const mapStateToProps: MapStateToProps<StateProps, void, RootReducerState> = (state) => ({
-	isPaused: isPaused(state),
+	isPaused: isAnimationPaused(state),
 });
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, void> = ({

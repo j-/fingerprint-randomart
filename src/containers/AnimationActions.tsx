@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { connect, MapStateToProps } from 'react-redux';
-import { RootReducerState, isAnimating } from '../store';
+import { RootReducerState, isAnimationEnabled } from '../store';
 import AnimationActions from '../components/AnimationActions';
 
 interface StateProps {
-	isAnimating: boolean;
+	isAnimationEnabled: boolean;
 }
 
 const mapStateToProps: MapStateToProps<StateProps, void, RootReducerState> = (state) => ({
-	isAnimating: isAnimating(state),
+	isAnimationEnabled: isAnimationEnabled(state),
 });
 
-const MaybeAnimationActions: React.StatelessComponent<StateProps> = ({ isAnimating }) => (
-	isAnimating ? <AnimationActions /> : null
+const MaybeAnimationActions: React.StatelessComponent<StateProps> = ({ isAnimationEnabled }) => (
+	isAnimationEnabled ? <AnimationActions /> : null
 );
 
 export default connect(

@@ -1,6 +1,6 @@
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { RootReducerState } from '../store';
-import { tickPlusOne } from '../store/actions';
+import { goNextFrame } from '../store/actions';
 import Button from '../components/Button';
 
 interface DispatchProps {
@@ -12,7 +12,7 @@ const mapStateToProps: MapStateToProps<void, void, RootReducerState> = () => ({
 });
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, void> = ({
-	onClick: tickPlusOne,
+	onClick: goNextFrame,
 });
 
 export default connect(

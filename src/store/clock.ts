@@ -1,6 +1,6 @@
 import { Middleware, Dispatch } from 'redux';
 import { ActionTickClock, tick, isActionSetTickDelay } from './actions';
-import { RootReducerState, getTickDelay, isPaused, isAnimating } from '.';
+import { RootReducerState, getTickDelay, isAnimationPaused, isAnimationEnabled } from '.';
 
 let interval: NodeJS.Timer;
 let callback: () => void;
@@ -10,10 +10,10 @@ export const clock: Middleware<void, RootReducerState, Dispatch<ActionTickClock>
 	next(action);
 	const after = store.getState();
 	const delay = getTickDelay(after);
-	const isPausedBefore = isPaused(before);
-	const isPausedAfter = isPaused(after);
-	const isAnimatingBefore = isAnimating(before);
-	const isAnimatingAfter = isAnimating(after);
+	const isPausedBefore = isAnimationPaused(before);
+	const isPausedAfter = isAnimationPaused(after);
+	const isAnimatingBefore = isAnimationEnabled(before);
+	const isAnimatingAfter = isAnimationEnabled(after);
 
 	// Action has paused the animation
 	if (!isPausedBefore && isPausedAfter || isAnimatingBefore !== isAnimatingAfter) {

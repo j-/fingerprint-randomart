@@ -110,11 +110,11 @@ export const incrementTicks = (amount: number): ActionIncrementTicks => ({
 	},
 });
 
-export const tickPlusOne = () => (
+export const goNextFrame = () => (
 	incrementTicks(1)
 );
 
-export const tickMinusOne = () => (
+export const goPrevFrame = () => (
 	incrementTicks(-1)
 );
 
