@@ -16,7 +16,7 @@ export default class RandomArtRaw extends React.Component<Props> {
 			const before = raw.substring(0, i);
 			const e = raw[i];
 			const after = raw.substring(i + 1);
-			return <pre>{before}<strong>{e}</strong>{after}</pre>;
+			return <pre>{before}<mark>{e}</mark>{after}</pre>;
 		} else {
 			return <pre>{raw}</pre>;
 		}
