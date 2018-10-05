@@ -7,6 +7,7 @@ import {
 	isActionTickClock,
 	isActionSetTickDelay,
 	isActionIncrementTicks,
+	isActionToggleAnimating,
 } from './actions';
 
 export interface RootReducerState {
@@ -30,6 +31,14 @@ const reducer: Reducer<RootReducerState> = (state = DEFAULT_STATE, action) => {
 		return {
 			...state,
 			isAnimating: action.data.animating,
+			tick: 0, // Reset clock when toggling animation
+		};
+	}
+
+	if (isActionToggleAnimating(action)) {
+		return {
+			...state,
+			isAnimating: !isAnimating(state),
 			tick: 0, // Reset clock when toggling animation
 		};
 	}

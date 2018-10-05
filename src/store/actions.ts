@@ -25,6 +25,18 @@ export const stopAnimating = (): ActionSetAnimating => ({
 	},
 });
 
+export interface ActionToggleAnimating {
+	type: 'ToggleAnimating';
+}
+
+export const isActionToggleAnimating = (action: Action): action is ActionToggleAnimating => (
+	action.type === 'ToggleAnimating'
+);
+
+export const toggleAnimation = (): ActionToggleAnimating => ({
+	type: 'ToggleAnimating',
+});
+
 export interface ActionSetPaused {
 	type: 'SetPaused';
 	data: {

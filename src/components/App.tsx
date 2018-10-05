@@ -1,11 +1,11 @@
 import * as React from 'react';
-import AnimationActions from './AnimationActions';
+import Animation from './Animation';
 import FingerprintRandomart from '../containers/FingerprintRandomartAnimated';
 import AllDirections from './AllDirections';
 
 const App: React.StatelessComponent = () => (
 	<div className="App">
-		<AnimationActions />
+		<Animation />
 		<FingerprintRandomart />
 		<AllDirections />
 	</div>
