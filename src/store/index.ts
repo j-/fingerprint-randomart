@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+import {  } from '../fingerprint-randomart';
 import {
 	isActionSetAnimating,
 	isActionSetPaused,
@@ -89,10 +90,22 @@ export const getDigest = (state: RootReducerState) => (
 	state.digest.replace(/[^0-9a-f]/gi, '').toLowerCase()
 );
 
+/** Number of bytes in digest. */
+export const getDigestLength = (state: RootReducerState) => (
+	getDigest(state).length
+);
+
 /** Get the current number of ticks for the clock. */
 export const getClockTick = (state: RootReducerState) => (
 	state.tick
 );
+
+/** Get the clock tick value bound between 0 and 2 * digest length. */
+export const getBoundClockTick = (state: RootReducerState) => {
+	const max = getDigestLength(state) * 2 + 1;
+	const tick = getClockTick(state);
+	return (tick % max + max) % max;
+};
 
 /** Number of milliseconds between clock ticks. */
 export const getTickDelay = (state: RootReducerState) => (

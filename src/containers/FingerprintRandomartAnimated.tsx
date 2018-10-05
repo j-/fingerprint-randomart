@@ -1,6 +1,6 @@
 import { connect, MapStateToProps } from 'react-redux';
 import FingerprintRandomartFrame from '../components/FingerprintRandomartFrame';
-import { RootReducerState, getDigest, getClockTick } from '../store';
+import { RootReducerState, getDigest, getBoundClockTick } from '../store';
 
 interface StateProps {
 	digest: string;
@@ -9,7 +9,7 @@ interface StateProps {
 
 const mapStateToProps: MapStateToProps<StateProps, void, RootReducerState> = (state) => ({
 	digest: getDigest(state),
-	tick: getClockTick(state),
+	tick: getBoundClockTick(state),
 });
 
 export default connect(
