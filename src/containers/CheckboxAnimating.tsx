@@ -9,7 +9,7 @@ const mapStateToProps: MapStateToProps<InputProps, InputProps, RootReducerState>
 });
 
 const mapDispatchToProps: MapDispatchToProps<InputProps, void> = ({
-	onClick: toggleAnimation,
+	onChange: toggleAnimation,
 });
 
 export default connect(
