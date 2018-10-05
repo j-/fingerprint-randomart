@@ -19,7 +19,7 @@ export interface RootReducerState {
 }
 
 const DEFAULT_STATE: RootReducerState = {
-	isAnimating: true,
+	isAnimating: false,
 	isPaused: true,
 	digest: '0b2f3ae7adef1fa6c6698fe372c22c8a4a58387bf165efcc54b253704400dc85',
 	tick: 0,
