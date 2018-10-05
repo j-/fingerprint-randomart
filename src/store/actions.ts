@@ -80,6 +80,32 @@ export const tick = (): ActionTickClock => ({
 	type: 'TickClock',
 });
 
+export interface ActionIncrementTicks {
+	type: 'IncrementTicks';
+	data: {
+		amount: number;
+	};
+}
+
+export const isActionIncrementTicks = (action: Action): action is ActionIncrementTicks => (
+	action.type === 'IncrementTicks'
+);
+
+export const incrementTicks = (amount: number): ActionIncrementTicks => ({
+	type: 'IncrementTicks',
+	data: {
+		amount,
+	},
+});
+
+export const tickPlusOne = () => (
+	incrementTicks(1)
+);
+
+export const tickMinusOne = () => (
+	incrementTicks(-1)
+);
+
 export interface ActionSetTickDelay {
 	type: 'SetTickDelay';
 	data: {
